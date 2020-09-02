@@ -10,7 +10,6 @@ namespace OOP_Exercises
     {
         static void Main(string[] args)
         {
-
         }
     }
 }
