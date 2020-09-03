@@ -44,7 +44,7 @@ namespace OOP_Exercises
             return this;
         }
 
-        public static Fraction Sum(Fraction fraction1, Fraction fraction2)
+        private static Fraction Sum(Fraction fraction1, Fraction fraction2)
         {
             Fraction result = new Fraction();
             result.Denominator = MathTools.MCM(fraction1.Denominator, fraction2.Denominator);
@@ -52,7 +52,7 @@ namespace OOP_Exercises
 
             return result;
         }
-        public static Fraction Subtract(Fraction fraction1, Fraction fraction2)
+        private static Fraction Subtract(Fraction fraction1, Fraction fraction2)
         {
             Fraction result = new Fraction();
             result.Denominator = MathTools.MCM(fraction1.Denominator, fraction2.Denominator);
@@ -61,7 +61,7 @@ namespace OOP_Exercises
             return result;
         }
 
-        public static Fraction Multiply(Fraction fraction1, Fraction fraction2)
+        private static Fraction Multiply(Fraction fraction1, Fraction fraction2)
         {
             Fraction result = new Fraction
             {
@@ -71,7 +71,7 @@ namespace OOP_Exercises
 
             return result.Simplify();
         }
-        public static Fraction Divide(Fraction fraction1, Fraction fraction2)
+        private static Fraction Divide(Fraction fraction1, Fraction fraction2)
         {
             int tmpNum = fraction2.Numerator;
             int tmpDen = fraction2.Denominator;
