@@ -8,45 +8,32 @@ namespace OOP_Exercises
 {
     class Set
     {
-        public int[] Sequence { get; private set; }
-        public Set(int[] sequence) => Sequence = sequence;
+        public List<int> Sequence { get; private set; }
+        public Set(List<int> sequence) => Sequence = sequence;
 
         public bool Contains(int element)
         {
-            if (Array.IndexOf(Sequence, element) >= 0)
-            {
-                return true;
-            }
-            return false;
+            return Sequence.Contains(element);
         }
 
         public void Add(int element)
         {
-            int[] newSequence = new int[Sequence.Length + 1];
-
-            Array.Copy(Sequence, newSequence, Sequence.Length);
-            newSequence[newSequence.Length - 1] = element;
-
-            Sequence = newSequence;
+            Sequence.Add(element);            
         }
 
         public int Cardinality()
         {
-            return Sequence.Length;
+            return Sequence.Count;
         }
-
-        public int[] ToArray()
-        {
-            if (Sequence == null)
-                return Sequence = new int[] { };
-
-            return Sequence;
-        }
-
+        
         private static Set Union(Set s1, Set s2)
         {
-            Set finalSet = new Set(new int[s1.Cardinality()]);
-            Array.Copy(s1.Sequence, finalSet.Sequence, s1.Sequence.Length);
+            Set finalSet = new Set(new List<int>());
+
+            foreach (var item in s1.Sequence)
+            {
+                finalSet.Add(item);
+            }
 
             foreach (var item in s2.Sequence)
             {
@@ -61,7 +48,7 @@ namespace OOP_Exercises
 
         private static Set Intersection(Set s1, Set s2)
         {
-            Set finalSet = new Set(new int[] { });
+            Set finalSet = new Set(new List<int>());
 
             foreach (var item in s1.Sequence)
             {
@@ -76,7 +63,7 @@ namespace OOP_Exercises
 
         private static Set Difference(Set s1, Set s2)
         {
-            Set finalSet = new Set(new int[] { });
+            Set finalSet = new Set(new List<int>());
 
             foreach (var item in s1.Sequence)
             {
