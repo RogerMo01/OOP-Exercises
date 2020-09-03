@@ -43,7 +43,7 @@ namespace OOP_Exercises
             return Sequence;
         }
 
-        public static Set Union(Set s1, Set s2)
+        private static Set Union(Set s1, Set s2)
         {
             Set finalSet = new Set(new int[s1.Cardinality()]);
             Array.Copy(s1.Sequence, finalSet.Sequence, s1.Sequence.Length);
@@ -59,7 +59,7 @@ namespace OOP_Exercises
             return finalSet;
         }
 
-        public static Set Intersection(Set s1, Set s2)
+        private static Set Intersection(Set s1, Set s2)
         {
             Set finalSet = new Set(new int[] { });
 
@@ -74,7 +74,7 @@ namespace OOP_Exercises
             return finalSet;
         }
 
-        public static Set Difference(Set s1, Set s2)
+        private static Set Difference(Set s1, Set s2)
         {
             Set finalSet = new Set(new int[] { });
 
