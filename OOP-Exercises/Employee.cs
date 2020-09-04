@@ -11,7 +11,7 @@ namespace OOP_Exercises
         public int Id { get; private set; }
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
-        public int Salary { get; private set; }
+        public int Salary = 0;
 
         public Employee(int id, string firstName, string lastName, int salary)
         {
