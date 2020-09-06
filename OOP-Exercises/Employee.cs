@@ -12,7 +12,8 @@ namespace OOP_Exercises
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
         public int Salary = 0;
-
+        public new string ToString => "Id-" + Id + " FirstName-" + FirstName + " LastName-" + LastName + " CurrentSalary-" + Salary;
+        
         public Employee(int id, string firstName, string lastName, int salary)
         {
             Id = id;
@@ -53,6 +54,6 @@ namespace OOP_Exercises
         public void RaiseSalary(int percent)
         {
             Salary += Salary / 100 * percent;
-        }
+        }        
     }
 }
