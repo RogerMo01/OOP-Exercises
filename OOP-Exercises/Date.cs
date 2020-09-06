@@ -11,7 +11,7 @@ namespace OOP_Exercises
         public int Day { get; private set; }
         public int Month { get; private set; }
         public int Year { get; private set; }
-        public new string ToString => Day + "-" + Month + "-" + Year;
+        public new string ToString => $"{Day}-{Month}-{Year}";
         private static bool LeapYear = false;
         private static int[] MonthsOf31 = new int[] { 1, 3, 5, 7, 8, 10, 12};        
 
