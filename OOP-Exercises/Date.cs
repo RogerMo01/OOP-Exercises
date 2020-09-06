@@ -12,8 +12,6 @@ namespace OOP_Exercises
         public int Month { get; private set; }
         public int Year { get; private set; }
         public new string ToString => $"{Day}-{Month}-{Year}";
-        private static bool LeapYear = false;
-        private static int[] MonthsOf31 = new int[] { 1, 3, 5, 7, 8, 10, 12};        
 
         public Date(int day, int month, int year)
         {
@@ -37,39 +35,24 @@ namespace OOP_Exercises
 
         private bool CheckParameters(int day, int month, int year)
         {
-            if (year % 4 == 0)
-                LeapYear = true;
-
             if (month > 12 || month < 1)
             {
                 return InvalidValue("month");
             }
 
-            switch (day)
+            int daysInMonth = 31 - ((month == 2) ? (3 - LeapYearsCase(year)) : ((month - 1) % 7 % 2));
+
+            if (day < 1 || day > daysInMonth)
             {
-                case 29:
-                    if (month == 2 && !LeapYear)
-                        return InvalidValue("day");                    
-                    break;
-
-                case 30:
-                    if (month == 2)
-                        return InvalidValue("day");                    
-                    break;
-
-                case 31:
-                    if (MonthsOf31.All(x => x != month))
-                        return InvalidValue("day");
-                    break;
-
-                default:
-                    if (day < 1 || day > 31)
-                    {
-                        return InvalidValue("day");
-                    }
-                    break;
+                return InvalidValue("day");
             }
+            
             return true;
+        }
+
+        private int LeapYearsCase(int year)
+        {
+            return (year % 4 == 0) ? 1 : 0;
         }
 
         private bool InvalidValue(string parameter)
