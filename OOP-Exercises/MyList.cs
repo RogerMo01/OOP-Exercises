@@ -8,20 +8,24 @@ namespace OOP_Exercises
 {
     class MyList
     {
-        public int[] Sequence { get; set; }
-        public int Count => Sequence.Length;
-
+        private int[] Sequence { get; set; }
+        public int Count { get; private set; } = 0;
 
         /// <summary>
         /// Initialize an empty MyList
         /// </summary>
-        public MyList() => Sequence = new int[0];
+        public MyList() => Sequence = new int[1000];
+
         /// <summary>
         /// Initialize MyList based on an already exists Array
         /// </summary>
         /// <param name="baseArray"></param>
-        public MyList(int[] baseArray) => Sequence = baseArray;        
-
+        public MyList(int[] baseArray)
+            : this()
+        {
+            Array.Copy(baseArray, Sequence, baseArray.Length);
+            Count = baseArray.Length;
+        }
 
         /// <summary>
         /// Adds an int element to the end of MyList
@@ -29,11 +33,20 @@ namespace OOP_Exercises
         /// <param name="element"></param>
         public void Add(int element)
         {
-            int[] newSequence = new int[Sequence.Length + 1];
+            if (Count == 1000)
+            {
+                ExpandSize();
+                Sequence[Count] = element;
+            }
+            else Sequence[Count] = element;
 
+            Count++;
+        }
+
+        private void ExpandSize()
+        {
+            int[] newSequence = new int[Count + 1000];
             Array.Copy(Sequence, newSequence, Sequence.Length);
-            newSequence[newSequence.Length - 1] = element;
-
             Sequence = newSequence;
         }
 
@@ -43,12 +56,10 @@ namespace OOP_Exercises
         /// <param name="collection"></param>
         public void AddRange(int[] collection)
         {
-            int[] newSequence = new int[Sequence.Length + collection.Length];
-
-            Array.Copy(Sequence, newSequence, Sequence.Length);
-            Array.ConstrainedCopy(collection, 0, newSequence, Sequence.Length, collection.Length);
-
-            Sequence = newSequence;
+            foreach (var item in collection)
+            {
+                Add(item);
+            }            
         }
 
         /// <summary>
@@ -69,6 +80,7 @@ namespace OOP_Exercises
         public void Clear()
         {
             Sequence = new int[0];
+            Count = 0;
         }
 
         /// <summary>
@@ -82,7 +94,7 @@ namespace OOP_Exercises
         }
 
         /// <summary>
-        /// Copies a range of elements from the System.Collections.Generic.List`1 to a compatible one-dimensional array, starting at the specified index of the target array.
+        /// Copies a range of elements from MyList to a compatible one-dimensional array, starting at the specified index of the target array.
         /// </summary>
         /// <param name="index"></param>
         /// <param name="array"></param>
@@ -172,13 +184,18 @@ namespace OOP_Exercises
         /// <param name="collection"></param>
         public void InsertRange(int index, int[] collection)
         {
-            int[] newSequence = new int[Sequence.Length + collection.Length];
+            if (collection.Length > 1000 - Count)
+            {
+                ExpandSize();
+            }
 
-            Array.Copy(Sequence, 0, newSequence, 0, index);
-            Array.Copy(collection, 0, newSequence, index, collection.Length);
-            Array.Copy(Sequence, index, newSequence, index + collection.Length, Sequence.Length - index);
+            Array.Copy(Sequence, index, Sequence, index + collection.Length, Count - index);
+            for (int i = index; i < collection.Length + index; i++)
+            {
+                Sequence[i] = collection[i - index];
+            }
 
-            Sequence = newSequence;
+            Count += collection.Length;
         }
 
         /// <summary>
@@ -205,12 +222,9 @@ namespace OOP_Exercises
         /// <param name="index"></param>
         public void RemoveAt(int index)
         {
-            int[] newSequence = new int[Sequence.Length - 1];
-
-            Array.Copy(Sequence, newSequence, index);
-            Array.Copy(Sequence, index + 1, newSequence, index, newSequence.Length - index);
-
-            Sequence = newSequence;
+            Array.Copy(Sequence, index + 1, Sequence, index, Count - index + 1);
+            Sequence[Count] = 0;
+            Count--;
         }        
 
         /// <summary>
@@ -218,7 +232,7 @@ namespace OOP_Exercises
         /// </summary>
         public void Reverse()
         {
-            Array.Reverse(Sequence);
+            Array.Reverse(Sequence, 0, Count);
         }
 
         /// <summary>
@@ -236,7 +250,7 @@ namespace OOP_Exercises
         /// </summary>
         public void Sort()
         {
-            Array.Sort(Sequence);
+            Array.Sort(Sequence, 0, Count);
         }
 
         /// <summary>
@@ -245,7 +259,9 @@ namespace OOP_Exercises
         /// <returns></returns>
         public int[] ToArray()
         {
-            return Sequence;
+            int[] toReturn = new int[Count];
+            Array.Copy(Sequence, toReturn, Count);
+            return toReturn;
         }
     }
 }
