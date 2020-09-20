@@ -10,6 +10,7 @@ namespace OOP_Exercises
     {
         private int[] Sequence { get; set; }
         public int Count { get; private set; } = 0;
+        private int limitForExpand = 1000;
 
         /// <summary>
         /// Initialize an empty MyList
@@ -33,7 +34,7 @@ namespace OOP_Exercises
         /// <param name="element"></param>
         public void Add(int element)
         {
-            if (Count == 1000)
+            if (Count == limitForExpand)
             {
                 ExpandSize();
                 Sequence[Count] = element;
@@ -48,6 +49,7 @@ namespace OOP_Exercises
             int[] newSequence = new int[Count + 1000];
             Array.Copy(Sequence, newSequence, Sequence.Length);
             Sequence = newSequence;
+            limitForExpand =+ 1000;
         }
 
         /// <summary>
