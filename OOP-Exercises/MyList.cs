@@ -71,7 +71,7 @@ namespace OOP_Exercises
         /// <returns></returns>
         public int BinarySearch(int element)
         {
-            return Array.BinarySearch(Sequence, element);
+            return MathToolsLibrary.MathTools.BinarySearch(Sequence, element);
         }
 
         /// <summary>
