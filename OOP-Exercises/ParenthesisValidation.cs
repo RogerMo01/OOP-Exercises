@@ -11,7 +11,6 @@ namespace OOP_Exercises
         public static bool AreParenthesesValidated(string expression)
         {
             char[] characters = expression.ToCharArray();
-            char[] path = characters.Where(x => IsParentheses(x)).ToArray();
 
             LinkedList<char> pending = new LinkedList<char>();
 
@@ -27,12 +26,7 @@ namespace OOP_Exercises
             }
 
             return pending.Count == 0;
-        }
-        
-        private static bool IsParentheses(char element)
-        {
-            return (IsOpenParenthesis(element) || element == ')' || element == '}' || element == ']');
-        }
+        }        
         
         private static bool IsOpenParenthesis(char element)
         {
