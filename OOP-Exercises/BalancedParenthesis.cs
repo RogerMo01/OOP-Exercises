@@ -6,30 +6,16 @@ using System.Threading.Tasks;
 
 namespace OOP_Exercises
 {
-    class BalancedParenthesis
+    static class BalancedParenthesis
     {
-        public string Expression { get; private set; } = "";
-
-        public BalancedParenthesis(string expression)
+        public static bool AreParenthesesBalanced(string expression)
         {
-            Expression = expression;
-
-            if (!AreAllParenthesis(Expression))
+            if (!AreAllParenthesis(expression))
             {
                 Console.WriteLine("Invalid Expression");
-                return;
+                return false;
             }
 
-            Console.WriteLine($"Is Balanced: {IsBalanced(Expression)}");
-        }
-
-        private static bool AreAllParenthesis(string expression)
-        {
-            return expression.All(x => x == '(' || x == ')');
-        }
-
-        private static bool IsBalanced(string expression)
-        {
             int counter = 0;
 
             for (int i = 0; i < expression.Length; i++)
@@ -40,6 +26,11 @@ namespace OOP_Exercises
             }
 
             return counter == 0;
+        }
+        
+        private static bool AreAllParenthesis(string expression)
+        {
+            return expression.All(x => x == '(' || x == ')');
         }
     }
 }
