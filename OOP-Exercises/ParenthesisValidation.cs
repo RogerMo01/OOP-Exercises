@@ -6,45 +6,34 @@ using System.Threading.Tasks;
 
 namespace OOP_Exercises
 {
-    class ParenthesisValidation
+    static class ParenthesesValidation
     {
-        public string Expression;
-
-        public ParenthesisValidation(string expression)
-        {
-            Expression = expression;
-
-            if (CheckValidation(Expression))
-                Console.WriteLine("Valid Expression");
-            else Console.WriteLine("Invalid Expression");
-        }
-
-        private static bool CheckValidation(string expression)
+        public static bool AreParenthesesValidated(string expression)
         {
             char[] characters = expression.ToCharArray();
             char[] path = characters.Where(x => IsParentheses(x)).ToArray();
 
             LinkedList<char> pending = new LinkedList<char>();
 
-            for (int i = 0; i < path.Length; i++)
+            for (int i = 0; i < characters.Length; i++)
             {
-                if (IsOpenParenthesis(path[i]))
-                    pending.AddLast(path[i]);
+                if (IsOpenParenthesis(characters[i]))
+                    pending.AddLast(characters[i]);
                 else
                 {
-                    if (IsHomologous(pending.Last.Value, path[i]))
+                    if (IsHomologous(pending.Last.Value, characters[i]))
                         pending.RemoveLast();
                 }
             }
 
             return pending.Count == 0;
         }
-
+        
         private static bool IsParentheses(char element)
         {
             return (IsOpenParenthesis(element) || element == ')' || element == '}' || element == ']');
         }
-
+        
         private static bool IsOpenParenthesis(char element)
         {
             return (element == '(' || element == '{' || element == '[');
