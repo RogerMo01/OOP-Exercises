@@ -51,21 +51,12 @@ namespace OOP_Exercises
         /// <returns></returns>
         public Node AddFirst(int value)
         {
-            Node node;
-            if (Count == 0)
-            {
-                node = new Node(value, null, null);
-                LastNode = node;
-            }
-            else
-            {
-                node = new Node(value, null, FirstNode);
-                FirstNode.Previous = node;
-            }
-            FirstNode = node;
-            Count++;
-            return node;
+            Node newNode = new Node(value);
+            AddFirst(newNode);
+
+            return newNode;
         }
+
 
         /// <summary>
         /// Adds the specified new node at the end of MyLinkedList
@@ -93,20 +84,10 @@ namespace OOP_Exercises
         /// <returns></returns>
         public Node AddLast(int value)
         {
-            Node node;
-            if (Count == 0)
-            {
-                node = new Node(value, null, null);
-                FirstNode = node;
-            }
-            else
-            {
-                node = new Node(value, LastNode, null);
-                LastNode.Next = node;
-            }
-            LastNode = node;
-            Count++;
-            return node;
+            Node newNode = new Node(value);
+            AddLast(newNode);
+
+            return newNode;
         }
 
         /// <summary>
