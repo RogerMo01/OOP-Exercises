@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace OOP_Exercises
 {
-    public class MyNode
+    public class Node
     {
         public int Value { get; private set; }
-        public MyNode Previous { get; set; } = null;
-        public MyNode Next { get; set; } = null;
+        public Node Previous { get; set; } = null;
+        public Node Next { get; set; } = null;
 
-        public MyNode(int value) => Value = value;
-        public MyNode(int value, MyNode previous, MyNode next)
+        public Node(int value) => Value = value;
+        public Node(int value, Node previous, Node next)
             : this(value)
         {
             Previous = previous;

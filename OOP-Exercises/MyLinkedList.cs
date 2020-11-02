@@ -6,30 +6,30 @@ using System.Threading.Tasks;
 
 namespace OOP_Exercises
 {
-    public class MyLinkedList
+    public class LinkedList
     {
         /// <summary>
         /// Gets the first node of MyLinkedList
         /// </summary>
-        public MyNode FirstNode { get; private set; } = null;
+        public Node FirstNode { get; private set; } = null;
 
         /// <summary>
         /// Gets the last node of MyLinkedList
         /// </summary>
         /// <param name="node"></param>
-        public MyNode LastNode { get; private set; } = null;
+        public Node LastNode { get; private set; } = null;
         private int Count = 0;
 
         /// <summary>
         /// Initializes a new instance of MyLinkedList class that is empty.
         /// </summary>
-        public MyLinkedList() { }
+        public LinkedList() { }
 
         /// <summary>
         /// Adds the specified new node at the start of MyLinkedList
         /// </summary>
         /// <param name="node"></param>
-        public void AddFirst(MyNode node)
+        public void AddFirst(Node node)
         {
             if (Count == 0)
             {
@@ -49,17 +49,17 @@ namespace OOP_Exercises
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public MyNode AddFirst(int value)
+        public Node AddFirst(int value)
         {
-            MyNode node;
+            Node node;
             if (Count == 0)
             {
-                node = new MyNode(value, null, null);
+                node = new Node(value, null, null);
                 LastNode = node;
             }
             else
             {
-                node = new MyNode(value, null, FirstNode);
+                node = new Node(value, null, FirstNode);
                 FirstNode.Previous = node;
             }
             FirstNode = node;
@@ -71,7 +71,7 @@ namespace OOP_Exercises
         /// Adds the specified new node at the end of MyLinkedList
         /// </summary>
         /// <param name="node"></param>
-        public void AddLast(MyNode node)
+        public void AddLast(Node node)
         {
             if (Count == 0)
             {
@@ -91,17 +91,17 @@ namespace OOP_Exercises
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public MyNode AddLast(int value)
+        public Node AddLast(int value)
         {
-            MyNode node;
+            Node node;
             if (Count == 0)
             {
-                node = new MyNode(value, null, null);
+                node = new Node(value, null, null);
                 FirstNode = node;
             }
             else
             {
-                node = new MyNode(value, LastNode, null);
+                node = new Node(value, LastNode, null);
                 LastNode.Next = node;
             }
             LastNode = node;
@@ -114,7 +114,7 @@ namespace OOP_Exercises
         /// </summary>
         /// <param name="node"></param>
         /// <param name="newNode"></param>
-        public void AddAfter(MyNode node, MyNode newNode)
+        public void AddAfter(Node node, Node newNode)
         {
             if (!Contains(node))
             {
@@ -134,14 +134,14 @@ namespace OOP_Exercises
         /// <param name="node"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        public MyNode AddAfter(MyNode node, int value)
+        public Node AddAfter(Node node, int value)
         {
             if (!Contains(node))
             {
                 Console.WriteLine("The entered node does not exists");
                 return null;
             }
-            MyNode newNode = new MyNode(value, node, node.Next);
+            Node newNode = new Node(value, node, node.Next);
             node.Next = newNode;
             newNode.Next.Previous = newNode;
             Count++;
@@ -153,7 +153,7 @@ namespace OOP_Exercises
         /// </summary>
         /// <param name="node"></param>
         /// <param name="newNode"></param>
-        public void AddBefore(MyNode node, MyNode newNode)
+        public void AddBefore(Node node, Node newNode)
         {
             if (!Contains(node))
             {
@@ -173,7 +173,7 @@ namespace OOP_Exercises
         /// <param name="node"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        public MyNode AddBefore(MyNode node, int value)
+        public Node AddBefore(Node node, int value)
         {
             if (!Contains(node))
             {
@@ -181,7 +181,7 @@ namespace OOP_Exercises
                 return null;
             }
 
-            MyNode newNode = new MyNode(value, node.Previous, node);
+            Node newNode = new Node(value, node.Previous, node);
 
             if (node == FirstNode)
             {
@@ -213,12 +213,12 @@ namespace OOP_Exercises
         /// </summary>
         /// <param name="node"></param>
         /// <returns></returns>
-        public bool Contains(MyNode node)
+        public bool Contains(Node node)
         {
             if (node == LastNode)
                 return true;
 
-            MyNode indexer = FirstNode;
+            Node indexer = FirstNode;
             while (indexer != LastNode)
             {
                 if (indexer == node)
@@ -238,7 +238,7 @@ namespace OOP_Exercises
             if (value == LastNode.Value)
                 return true;
 
-            MyNode indexer = FirstNode;
+            Node indexer = FirstNode;
             while (indexer.Value != LastNode.Value)
             {
                 if (indexer.Value == value)
@@ -263,7 +263,7 @@ namespace OOP_Exercises
         /// Removes the specified node from MyLinkedList
         /// </summary>
         /// <param name="node"></param>
-        public void Remove(MyNode node)
+        public void Remove(Node node)
         {
             if (node == LastNode)
             {
@@ -298,7 +298,7 @@ namespace OOP_Exercises
                 return true;
             }
 
-            MyNode indexer = FirstNode.Next;
+            Node indexer = FirstNode.Next;
             while (indexer.Value != LastNode.Value)
             {
                 if (indexer.Value == value)
@@ -339,7 +339,7 @@ namespace OOP_Exercises
         {
             int[] finalArray = new int[Count];
 
-            MyNode indexer = FirstNode;
+            Node indexer = FirstNode;
             for (int i = 0; i < Count; i++)
             {
                 finalArray[i] = indexer.Value;
