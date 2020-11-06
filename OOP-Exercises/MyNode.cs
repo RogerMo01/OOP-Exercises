@@ -19,5 +19,19 @@ namespace OOP_Exercises
             Previous = previous;
             Next = next;
         }
+
+        public override bool Equals(object obj)
+        {
+            return ReferenceEquals(this, obj);
+        }
+
+        public static bool operator == (Node node, Node node2)
+        {
+            return node.Equals(node2);
+        }
+        public static bool operator != (Node node, Node node2)
+        {
+            return !node.Equals(node2);
+        }
     }
 }
