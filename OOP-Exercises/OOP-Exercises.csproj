@@ -55,6 +55,7 @@
     <Compile Include="InvoiceItem.cs" />
     <Compile Include="MyLinkedList.cs" />
     <Compile Include="MyList.cs" />
+    <Compile Include="ParenthesisValidation.cs" />
     <Compile Include="MyNode.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
