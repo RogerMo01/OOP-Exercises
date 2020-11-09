@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Account.cs" />
+    <Compile Include="BalancedParenthesis.cs" />
     <Compile Include="Circle.cs" />
     <Compile Include="Date.cs" />
     <Compile Include="Fraction.cs" />
