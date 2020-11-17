@@ -20,6 +20,8 @@ namespace OOP_Exercises
 
         public static string ToRoman(int number)
         {
+            ValidateNumber(number);
+
             string response = "";
             int times = 0;
 
@@ -66,7 +68,6 @@ namespace OOP_Exercises
             number -= 4 * (int)Math.Pow(10, (double)size - 1);
             return (number, response);
         }
-
 
         public static int ToArabic(string romanNumber)
         {
@@ -137,6 +138,12 @@ namespace OOP_Exercises
                     return numbr;
             }
             return 0;
+        }
+
+        private static void ValidateNumber(int number)
+        {            
+            if (number < 0 || number > 3999)
+            { throw new Exception("The programg only works with numbers from 0 to 3999"); }
         }
     }
 }
